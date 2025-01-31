@@ -1,18 +1,21 @@
-# @FizzxyDev/BaileysPro - Typescript/Javascript WhatsApp Web API
+# @AndhikaGG/baileys - Typescript/Javascript WhatsApp Web API
+
+### Credits
+This baileys copy from [FizzxyDev/BaileysPro](https://github.com/FizzxyDev/BaileysPro) and edited from me [Andhikagg/baileys](https://github.com/AndhikaGG/baileys)
 
 ### Important Note
 
 This library was originally a project of *@adiwajshing/baileys* and is in no way affiliated with or endorsed by WhatsApp. Use at your own discretion. Don't spam others with this. We do not encourage the use of stalking, mass or automated messaging.
 
 #### Liability and License Notice
-Fizzxy and its managers are not responsible for misuse of this application, as stated in the MIT license. Fizzxy management in no way condones the use of this application in practices that violate the WhatsApp Terms of Service. The manager of this application holds its users personally responsible for using this application in a fair manner, as it is intended to be used.
+Whiskeysockets and its managers are not responsible for misuse of this application, as stated in the MIT license. Whiskeysockets management in no way condones the use of this application in practices that violate the WhatsApp Terms of Service. The manager of this application holds its users personally responsible for using this application in a fair manner, as it is intended to be used.
 ##
 
-BaileysPro doesn't require Selenium or any other browser to interact with WhatsApp Web, it does it directly using WebSocket. Not running Selenium or Chromimum saves half a gig of ram :/ BaileysPro supports interaction with multi-device & web versions of WhatsApp.
+Baileys doesn't require Selenium or any other browser to interact with WhatsApp Web, it does it directly using WebSocket. Not running Selenium or Chromimum saves half a gig of ram :/ Baileys supports interaction with multi-device & web versions of WhatsApp.
  
 ## Please Read
 
-The original repository had to be removed by the original author - we are now continuing development of this repository here. This is one of the modification repositories and is maintained by Fizzxy.
+The original repository had to be removed by the original author - we are now continuing development of this repository here. This is one of the modification repositories and is maintained by AndhikaGG.
  
  
 ## Example
@@ -28,17 +31,17 @@ To run the example script, download or clone the repo and then type the followin
 
 Use the stable version:
 ```
-yarn add @FizzxyDev/BaileysPro
+yarn add @AndhikaGG/baileys
 ```
 
 Use the edge version (no guarantee of stability, but latest fixes + features)
 ```
-yarn add github:FizzxyDev/BaileysV2
+yarn add github:AndhikaGG/baileys
 ```
 
 Then import your code using:
 ``` ts 
-import makeWASocket from '@FizzxyDev/BaileysPro'
+import makeWASocket from '@AndhikaGG/baileys'
 ```
 
 ## Unit Tests
@@ -50,7 +53,7 @@ TODO
 WhatsApp provides a multi-device API that allows BaileysPro to be authenticated as a second WhatsApp client by scanning a QR code with WhatsApp on your phone.
 
 ``` ts
-import makeWASocket, { DisconnectReason } from '@FizzxyDev/BaileysPro'
+import makeWASocket, { DisconnectReason } from '@AndhikaGG/baileys'
 import { Boom } from '@hapi/boom'
 
 async function connectToWhatsApp () {
@@ -188,7 +191,7 @@ You obviously don't want to keep scanning the QR code every time you want to con
 
 So, you can load the credentials to log back in:
 ``` ts
-import makeWASocket, { BufferJSON, useMultiFileAuthState } from '@FizzxyDev/BaileysPro'
+import makeWASocket, { BufferJSON, useMultiFileAuthState } from '@AndhikaGG/baileys'
 import * as fs from 'fs'
 
 // utility function to help save the auth state in a single folder
@@ -303,7 +306,7 @@ BaileysPro does not come with a defacto storage for chats, contacts, or messages
 It can be used as follows:
 
 ``` ts
-import makeWASocket, { makeInMemoryStore } from '@FizzxyDev/BaileysPro'
+import makeWASocket, { makeInMemoryStore } from '@AndhikaGG/baileys'
 // the store maintains the data of the WA connection in memory
 // can be written out to a file & read from it
 const store = makeInMemoryStore({ })
@@ -342,7 +345,7 @@ The store also provides some simple functions such as `loadMessages` that utiliz
 ### Non-Media Messages
 
 ``` ts
-import { MessageType, MessageOptions, Mimetype } from '@FizzxyDev/BaileysPro'
+import { MessageType, MessageOptions, Mimetype } from '@AndhikaGG/baileys'
 
 const id = 'abcd@s.whatsapp.net' // the WhatsApp ID 
 // send a simple text!
@@ -401,7 +404,7 @@ Sending media (video, stickers, images) is easier & more efficient than ever.
 - When specifying a media url, BaileysPro never loads the entire buffer into memory; it even encrypts the media as a readable stream.
 
 ``` ts
-import { MessageType, MessageOptions, Mimetype } from '@FizzxyDev/BaileysPro'
+import { MessageType, MessageOptions, Mimetype } from '@AndhikaGG/baileys'
 // Sending gifs
 await sock.sendMessage(
     id, 
@@ -450,7 +453,7 @@ await sock.sendMessage(
                                     Do not enter this field if you want to automatically generate a thumb
                                 */
         mimetype: Mimetype.pdf, /* (for media messages) specify the type of media (optional for all media types except documents),
-                                    import {Mimetype} from '@FizzxyDev/BaileysPro'
+                                    import {Mimetype} from '@AndhikaGG/baileys'
                                 */
         fileName: 'somefile.pdf', // (for media messages) file name for the media
         /* will send audio messages as voice notes, if set to true */
@@ -509,7 +512,7 @@ The presence expires after about 10 seconds.
 If you want to save the media you received
 ``` ts
 import { writeFile } from 'fs/promises'
-import { downloadMediaMessage } from '@FizzxyDev/BaileysPro'
+import { downloadMediaMessage } from '@AndhikaGG/baileys'
 
 sock.ev.on('messages.upsert', async ({ messages }) => {
     const m = messages[0]
