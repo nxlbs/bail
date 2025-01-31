@@ -1,7 +1,7 @@
 # @AndhikaGG/baileys - Typescript/Javascript WhatsApp Web API
 
 ### Credits
-This baileys copy from [FizzxyDev/BaileysPro](https://github.com/FizzxyDev/BaileysPro) and edited from me [Andhikagg/baileys](https://github.com/AndhikaGG/baileys)
+This baileys copy from [FizzxyDev/BaileysV2](https://github.com/FizzxyDev/BaileysV2) and edited from me [Andhikagg/baileys](https://github.com/AndhikaGG/baileys)
 
 ### Important Note
 
