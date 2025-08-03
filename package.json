@@ -1,5 +1,5 @@
 {
-"name": "sanka-baileyss",
+  "name": "baileys",
   "version": "2.2.0",
   "description": "WhatsApp API Modification By Sanka_Vollerei",
   "keywords": [
@@ -14,15 +14,13 @@
     "whatsapp-chat",
     "whatsapp-group",
     "automation",
-    "multi-device",
-    "sanka-baileys"
+    "multi-device"
   ],
-  "homepage": "https://www.sankavolereii.my.id",
   "repository": {
-    "url": "git@github.com:SankaVollereii/Sanka-Baileys.git"
+    "url": "git@github.com:andhikagg/baileys.git"
   },
   "license": "MIT",
-  "author": "Sanka Vollereii",
+  "author": "Unknown",
   "main": "lib/index.js",
   "files": [
     "lib/*",

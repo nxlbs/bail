@@ -36,31 +36,31 @@ To run the example script, download or clone the repo and then type the followin
 
 Use the stable version:
 ```
-yarn add Sanka-Baileyss
+yarn add baileys
 ```
 ```
-npm install sanka-baileyss
+npm install git:andhikagg/baileys
 ```
 
 Use package.json
 ```
-"@whiskeysockets/baileys": "npm:sanka-baileyss@latest"
+"@whiskeysockets/baileys": "git:andhikagg/baileys@latest"
 ```
 ```
-"@adiwajshing/baileys": "npm:sanka-baileyss@latest"
+"@adiwajshing/baileys": "git:andhikagg/baileys@latest"
 ```
 
 Use the edge version (no guarantee of stability, but latest fixes + features)
 ```
-yarn add github:SankaVollereii/Sanka-Baileys
+yarn add github:andhikagg/baileys
 ```
 ```
-yarn add npm:sanka-baileyss@latest
+yarn add git:andhikagg/baileys@latest
 ```
 
 Then import your code using:
 ```ts 
-import makeWASocket from 'Sanka-Baileyss'
+import makeWASocket from 'baileys'
 ```
 
 # Links
@@ -217,7 +217,7 @@ WhatsApp provides a multi-device API that allows Baileys to be authenticated as 
 > You can customize browser name if you connect with **QR-CODE**, with `Browser` constant, we have some browsers config, **see [here](https://baileys.whiskeysockets.io/types/BrowsersMap.html)**
 
 ```ts
-import makeWASocket from 'Sanka-Baileyss'
+import makeWASocket from 'baileys'
 
 const sanka = makeWASocket({
     // can provide additional config here
@@ -237,7 +237,7 @@ If the connection is successful, you will see a QR code printed on your terminal
 The phone number can't have `+` or `()` or `-`, only numbers, you must provide country code
 
 ```ts
-import makeWASocket from 'Sanka-Baileyss'
+import makeWASocket from 'baileys'
 
 const sanka = makeWASocket({
     // can provide additional config here
@@ -310,7 +310,7 @@ You obviously don't want to keep scanning the QR code every time you want to con
 
 So, you can load the credentials to log back in:
 ```ts
-import makeWASocket, { useMultiFileAuthState } from 'Sanka-Baileyss'
+import makeWASocket, { useMultiFileAuthState } from 'baileys'
 
 const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys')
 
@@ -350,7 +350,7 @@ sanka.ev.on('messages.upsert', ({ messages }) => {
 > This example includes basic auth storage too
 
 ```ts
-import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'Sanka-Baileyss'
+import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'baileys'
 import { Boom } from '@hapi/boom'
 
 async function connectToWhatsApp () {
@@ -391,7 +391,7 @@ connectToWhatsApp()
 
 ### For example if you use useSingleFileAuthState and useMongoFileAuthState
 ```ts
-import makeWASocket, { useSingleFileAuthState, useMongoFileAuthState } from 'Sanka-Baileyss'
+import makeWASocket, { useSingleFileAuthState, useMongoFileAuthState } from 'baileys'
 
 // Single Auth
 const { state, saveState } = await useSingleFileAuthState('./auth_info_baileys.json') 
@@ -438,9 +438,9 @@ sanka.ev.on('creds.update', saveCreds)
 - By default poll votes are encrypted and handled in `messages.update`
 ```ts
 import pino from "pino"
-import { makeInMemoryStore, getAggregateVotesInPollMessage } from 'Sanka-Baileyss'
+import { makeInMemoryStore, getAggregateVotesInPollMessage } from 'baileys'
 
-const logger = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }).child({ class: "Sanka-Baileyss" })
+const logger = pino({ timestamp: () => `,"time":"${new Date().toJSON()}"` }).child({ class: "baileys" })
 logger.level = "fatal"
 const store = makeInMemoryStore({ logger })
 
@@ -487,7 +487,7 @@ sanka.ev.on("messages.update", async (chatUpdate) => {
 It can be used as follows:
 
 ```ts
-import makeWASocket, { makeInMemoryStore } from 'Sanka-Baileyss'
+import makeWASocket, { makeInMemoryStore } from 'baileys'
 // the store maintains the data of the WA connection in memory
 // can be written out to a file & read from it
 const store = makeInMemoryStore({ })
@@ -1956,9 +1956,9 @@ await sanka.sendMessage(jid, {
 If you want to save the media you received
 ```ts
 import { createWriteStream } from 'fs'
-import { downloadMediaMessage, getContentType } from 'Sanka-Baileyss'
+import { downloadMediaMessage, getContentType } from 'baileys'
 
-sanka.ev.on('messages.upsert', async ({ [m] }) => {
+sock.ev.on('messages.upsert', async ({ [m] }) => {
     if (!m.message) return // if there is no text or media message
     const messageType = getContentType(m) // get what type of message it is (text, image, video...)
 
@@ -1973,7 +1973,7 @@ sanka.ev.on('messages.upsert', async ({ [m] }) => {
                 logger,
                 // pass this so that baileys can request a reupload of media
                 // that has been deleted
-                reuploadRequest: sanka.updateMediaMessage
+                reuploadRequest: sock.updateMediaMessage
             }
         )
         // save to file
@@ -1987,7 +1987,7 @@ sanka.ev.on('messages.upsert', async ({ [m] }) => {
 
 - WhatsApp automatically removes old media from their servers. For the device to access said media -- a re-upload is required by another device that has it. This can be accomplished using: 
 ```ts
-await sanka.updateMediaMessage(msg)
+await sock.updateMediaMessage(msg)
 ```
 
 ## Reject Call
@@ -1995,7 +1995,7 @@ await sanka.updateMediaMessage(msg)
 - You can obtain `callId` and `callFrom` from `call` event
 
 ```ts
-await sanka.rejectCall(callId, callFrom)
+await sock.rejectCall(callId, callFrom)
 ```
 
 ## Send States in Chat
@@ -2008,7 +2008,7 @@ This means you have to keep track of unread messages.
 ```ts
 const key: WAMessageKey
 // can pass multiple keys to read multiple messages as well
-await sanka.readMessages([key])
+await sock.readMessages([key])
 ```
 
 The message ID is the unique identifier of the message that you are marking as read. 
@@ -2021,11 +2021,11 @@ On a `WAMessage`, the `messageID` can be accessed using ```messageID = message.k
 - This lets the person/group with `jid` know whether you're online, offline, typing etc. 
 
 ```ts
-await sanka.sendPresenceUpdate('available', jid) 
+await sock.sendPresenceUpdate('available', jid) 
 ```
 
 > [!NOTE]
-> If a desktop client is active, WA doesn't send push notifications to the device. If you would like to receive said notifications -- mark your Baileys client offline using `sanka.sendPresenceUpdate('unavailable')`
+> If a desktop client is active, WA doesn't send push notifications to the device. If you would like to receive said notifications -- mark your Baileys client offline using `sock.sendPresenceUpdate('unavailable')`
 
 ## Modifying Chats
 
@@ -2037,7 +2037,7 @@ WA uses an encrypted form of communication to send chat/app updates. This has be
 ### Archive a Chat
 ```ts
 const lastMsgInChat = await getLastMessageInChat(jid) // implement this on your end
-await sanka.chatModify({ archive: true, lastMessages: [lastMsgInChat] }, jid)
+await sock.chatModify({ archive: true, lastMessages: [lastMsgInChat] }, jid)
 ```
 ### Mute/Unmute a Chat
 
@@ -2051,20 +2051,20 @@ await sanka.chatModify({ archive: true, lastMessages: [lastMsgInChat] }, jid)
 
 ```ts
 // mute for 8 hours
-await sanka.chatModify({ mute: 8 * 60 * 60 * 1000 }, jid)
+await sock.chatModify({ mute: 8 * 60 * 60 * 1000 }, jid)
 // unmute
-await sanka.chatModify({ mute: null }, jid)
+await sock.chatModify({ mute: null }, jid)
 ```
 ### Mark a Chat Read/Unread
 ```ts
 const lastMsgInChat = await getLastMessageInChat(jid) // implement this on your end
 // mark it unread
-await sanka.chatModify({ markRead: false, lastMessages: [lastMsgInChat] }, jid)
+await sock.chatModify({ markRead: false, lastMessages: [lastMsgInChat] }, jid)
 ```
 
 ### Delete a Message for Me
 ```ts
-await sanka.chatModify(
+await sock.chatModify(
     {
         clear: {
             messages: [
@@ -2083,7 +2083,7 @@ await sanka.chatModify(
 ### Delete a Chat
 ```ts
 const lastMsgInChat = await getLastMessageInChat(jid) // implement this on your end
-await sanka.chatModify({
+await sock.chatModify({
         delete: true,
         lastMessages: [
             {
@@ -2097,7 +2097,7 @@ await sanka.chatModify({
 ```
 ### Pin/Unpin a Chat
 ```ts
-await sanka.chatModify({
+await sock.chatModify({
         pin: true // or `false` to unpin
     },
     jid
@@ -2105,7 +2105,7 @@ await sanka.chatModify({
 ```
 ### Star/Unstar a Message
 ```ts
-await sanka.chatModify({
+await sock.chatModify({
         star: {
             messages: [
                 {
@@ -2135,17 +2135,17 @@ await sanka.chatModify({
 
 ```ts
 // turn on disappearing messages
-await sanka.sendMessage(
+await sock.sendMessage(
     jid, 
     // this is 1 week in seconds -- how long you want messages to appear for
     { disappearingMessagesInChat: WA_DEFAULT_EPHEMERAL }
 )
 
 // will send as a disappearing message
-await sanka.sendMessage(jid, { text: 'hello' }, { ephemeralExpiration: WA_DEFAULT_EPHEMERAL })
+await sock.sendMessage(jid, { text: 'hello' }, { ephemeralExpiration: WA_DEFAULT_EPHEMERAL })
 
 // turn off disappearing messages
-await sanka.sendMessage(
+await sock.sendMessage(
     jid, 
     { disappearingMessagesInChat: false }
 )
@@ -2153,14 +2153,14 @@ await sanka.sendMessage(
 
 ### Clear Messages
 ```ts
-await sanka.clearMessage(jid, key, timestamps) 
+await sock.clearMessage(jid, key, timestamps) 
 ```
 
 ## User Querys
 
 ### Check If ID Exists in Whatsapp
 ```ts
-const [result] = await sanka.onWhatsApp(jid)
+const [result] = await sock.onWhatsApp(jid)
 if (result.exists) console.log (`${jid} exists on WhatsApp, as jid: ${result.jid}`)
 ```
 
@@ -2169,7 +2169,7 @@ if (result.exists) console.log (`${jid} exists on WhatsApp, as jid: ${result.jid
 - You need to have oldest message in chat
 ```ts
 const msg = await getOldestMessageInChat(jid)
-await sanka.fetchMessageHistory(
+await sock.fetchMessageHistory(
     50, //quantity (max: 50 per query)
     msg.key,
     msg.messageTimestamp
@@ -2179,7 +2179,7 @@ await sanka.fetchMessageHistory(
 
 ### Fetch Status
 ```ts
-const status = await sanka.fetchStatus(jid)
+const status = await sock.fetchStatus(jid)
 console.log('status: ' + status)
 ```
 
@@ -2187,34 +2187,34 @@ console.log('status: ' + status)
 - To get the display picture of some person, group and channel
 ```ts
 // for low res picture
-const ppUrl = await sanka.profilePictureUrl(jid)
+const ppUrl = await sock.profilePictureUrl(jid)
 console.log(ppUrl)
 ```
 
 ### Fetch Bussines Profile (such as description or category)
 ```ts
-const profile = await sanka.getBusinessProfile(jid)
+const profile = await sock.getBusinessProfile(jid)
 console.log('business description: ' + profile.description + ', category: ' + profile.category)
 ```
 
 ### Fetch Someone's Presence (if they're typing or online)
 ```ts
 // the presence update is fetched and called here
-sanka.ev.on('presence.update', console.log)
+sock.ev.on('presence.update', console.log)
 
 // request updates for a chat
-await sanka.presenceSubscribe(jid) 
+await sock.presenceSubscribe(jid) 
 ```
 
 ## Change Profile
 
 ### Change Profile Status
 ```ts
-await sanka.updateProfileStatus('Hello World!')
+await sock.updateProfileStatus('Hello World!')
 ```
 ### Change Profile Name
 ```ts
-await sanka.updateProfileName('My name')
+await sock.updateProfileName('My name')
 ```
 ### Change Display Picture (groups too)
 - To change your display picture or a group's
@@ -2223,11 +2223,11 @@ await sanka.updateProfileName('My name')
 > Like media messages, you can pass `{ stream: Stream }` or `{ url: Url }` or `Buffer` directly, you can see more [here](https://baileys.whiskeysockets.io/types/WAMediaUpload.html)
 
 ```ts
-await sanka.updateProfilePicture(jid, { url: './new-profile-picture.jpeg' })
+await sock.updateProfilePicture(jid, { url: './new-profile-picture.jpeg' })
 ```
 ### Remove display picture (groups too)
 ```ts
-await sanka.removeProfilePicture(jid)
+await sock.removeProfilePicture(jid)
 ```
 
 ## Groups
@@ -2237,14 +2237,14 @@ await sanka.removeProfilePicture(jid)
 ### Create a Group
 ```ts
 // title & participants
-const group = await sanka.groupCreate('My Fab Group', ['1234@s.whatsapp.net', '4564@s.whatsapp.net'])
+const group = await sock.groupCreate('My Fab Group', ['1234@s.whatsapp.net', '4564@s.whatsapp.net'])
 console.log('created group with id: ' + group.gid)
-await sanka.sendMessage(group.id, { text: 'hello there' }) // say hello to everyone on the group
+await sock.sendMessage(group.id, { text: 'hello there' }) // say hello to everyone on the group
 ```
 ### Add/Remove or Demote/Promote
 ```ts
 // id & people to add to the group (will throw error if it fails)
-await sanka.groupParticipantsUpdate(
+await sock.groupParticipantsUpdate(
     jid, 
     ['abcd@s.whatsapp.net', 'efgh@s.whatsapp.net'],
     'add' // replace this parameter with 'remove' or 'demote' or 'promote'
@@ -2252,68 +2252,68 @@ await sanka.groupParticipantsUpdate(
 ```
 ### Change Subject (name)
 ```ts
-await sanka.groupUpdateSubject(jid, 'New Subject!')
+await sock.groupUpdateSubject(jid, 'New Subject!')
 ```
 ### Change Description
 ```ts
-await sanka.groupUpdateDescription(jid, 'New Description!')
+await sock.groupUpdateDescription(jid, 'New Description!')
 ```
 ### Change Settings
 ```ts
 // only allow admins to send messages
-await sanka.groupSettingUpdate(jid, 'announcement')
+await sock.groupSettingUpdate(jid, 'announcement')
 // allow everyone to send messages
-await sanka.groupSettingUpdate(jid, 'not_announcement')
+await sock.groupSettingUpdate(jid, 'not_announcement')
 // allow everyone to modify the group's settings -- like display picture etc.
-await sanka.groupSettingUpdate(jid, 'unlocked')
+await sock.groupSettingUpdate(jid, 'unlocked')
 // only allow admins to modify the group's settings
-await sanka.groupSettingUpdate(jid, 'locked')
+await sock.groupSettingUpdate(jid, 'locked')
 ```
 ### Leave a Group
 ```ts
 // will throw error if it fails
-await sanka.groupLeave(jid)
+await sock.groupLeave(jid)
 ```
 ### Get Invite Code
 - To create link with code use `'https://chat.whatsapp.com/' + code`
 ```ts
-const code = await sanka.groupInviteCode(jid)
+const code = await sock.groupInviteCode(jid)
 console.log('group code: ' + code)
 ```
 ### Revoke Invite Code
 ```ts
-const code = await sanka.groupRevokeInvite(jid)
+const code = await sock.groupRevokeInvite(jid)
 console.log('New group code: ' + code)
 ```
 ### Join Using Invitation Code
 - Code can't have `https://chat.whatsapp.com/`, only code
 ```ts
-const response = await sanka.groupAcceptInvite(code)
+const response = await sock.groupAcceptInvite(code)
 console.log('joined to: ' + response)
 ```
 ### Get Group Info by Invite Code
 ```ts
-const response = await sanka.groupGetInviteInfo(code)
+const response = await sock.groupGetInviteInfo(code)
 console.log('group information: ' + response)
 ```
 ### Query Metadata (participants, name, description...)
 ```ts
-const metadata = await sanka.groupMetadata(jid) 
+const metadata = await sock.groupMetadata(jid) 
 console.log(metadata.id + ', title: ' + metadata.subject + ', description: ' + metadata.desc)
 ```
 ### Join using `groupInviteMessage`
 ```ts
-const response = await sanka.groupAcceptInviteV4(jid, groupInviteMessage)
+const response = await sock.groupAcceptInviteV4(jid, groupInviteMessage)
 console.log('joined to: ' + response)
 ```
 ### Get Request Join List
 ```ts
-const response = await sanka.groupRequestParticipantsList(jid)
+const response = await sock.groupRequestParticipantsList(jid)
 console.log(response)
 ```
 ### Approve/Reject Request Join
 ```ts
-const response = await sanka.groupRequestParticipantsUpdate(
+const response = await sock.groupRequestParticipantsUpdate(
     jid, // group id
     ['abcd@s.whatsapp.net', 'efgh@s.whatsapp.net'],
     'approve' // or 'reject' 
@@ -2322,7 +2322,7 @@ console.log(response)
 ```
 ### Get All Participating Groups Metadata
 ```ts
-const response = await sanka.groupFetchAllParticipating()
+const response = await sock.groupFetchAllParticipating()
 console.log(response)
 ```
 ### Toggle Ephemeral
@@ -2337,12 +2337,12 @@ console.log(response)
 | 90d    | 7.776.000  |
 
 ```ts
-await sanka.groupToggleEphemeral(jid, 86400)
+await sock.groupToggleEphemeral(jid, 86400)
 ```
 
 ### Change Add Mode
 ```ts
-await sanka.groupMemberAddMode(
+await sock.groupMemberAddMode(
     jid,
     'all_member_add' // or 'admin_add'
 )
@@ -2352,48 +2352,48 @@ await sanka.groupMemberAddMode(
 
 ### Block/Unblock User
 ```ts
-await sanka.updateBlockStatus(jid, 'block') // Block user
-await sanka.updateBlockStatus(jid, 'unblock') // Unblock user
+await sock.updateBlockStatus(jid, 'block') // Block user
+await sock.updateBlockStatus(jid, 'unblock') // Unblock user
 ```
 ### Get Privacy Settings
 ```ts
-const privacySettings = await sanka.fetchPrivacySettings(true)
+const privacySettings = await sock.fetchPrivacySettings(true)
 console.log('privacy settings: ' + privacySettings)
 ```
 ### Get BlockList
 ```ts
-const response = await sanka.fetchBlocklist()
+const response = await sock.fetchBlocklist()
 console.log(response)
 ```
 ### Update LastSeen Privacy
 ```ts
 const value = 'all' // 'contacts' | 'contact_blacklist' | 'none'
-await sanka.updateLastSeenPrivacy(value)
+await sock.updateLastSeenPrivacy(value)
 ```
 ### Update Online Privacy
 ```ts
 const value = 'all' // 'match_last_seen'
-await sanka.updateOnlinePrivacy(value)
+await sock.updateOnlinePrivacy(value)
 ```
 ### Update Profile Picture Privacy
 ```ts
 const value = 'all' // 'contacts' | 'contact_blacklist' | 'none'
-await sanka.updateProfilePicturePrivacy(value)
+await sock.updateProfilePicturePrivacy(value)
 ```
 ### Update Status Privacy
 ```ts
 const value = 'all' // 'contacts' | 'contact_blacklist' | 'none'
-await sanka.updateStatusPrivacy(value)
+await sock.updateStatusPrivacy(value)
 ```
 ### Update Read Receipts Privacy
 ```ts
 const value = 'all' // 'none'
-await sanka.updateReadReceiptsPrivacy(value)
+await sock.updateReadReceiptsPrivacy(value)
 ```
 ### Update Groups Add Privacy
 ```ts
 const value = 'all' // 'contacts' | 'contact_blacklist'
-await sanka.updateGroupsAddPrivacy(value)
+await sock.updateGroupsAddPrivacy(value)
 ```
 ### Update Default Disappearing Mode
 
@@ -2408,7 +2408,7 @@ await sanka.updateGroupsAddPrivacy(value)
 
 ```ts
 const ephemeral = 86400 
-await sanka.updateDefaultDisappearingMode(ephemeral)
+await sock.updateDefaultDisappearingMode(ephemeral)
 ```
 
 ## Broadcast Lists & Stories
@@ -2416,7 +2416,7 @@ await sanka.updateDefaultDisappearingMode(ephemeral)
 ### Send Broadcast & Stories
 - Messages can be sent to broadcasts & stories. You need to add the following message options in sendMessage, like this:
 ```ts
-await sanka.sendMessage(
+await sock.sendMessage(
     jid,
     {
         image: {
@@ -2442,7 +2442,7 @@ await sanka.sendMessage(
 - Broadcast IDs are in the format `12345678@broadcast`
 ### Query a Broadcast List's Recipients & Name
 ```ts
-const bList = await sanka.getBroadcastListInfo('1234@broadcast')
+const bList = await sock.getBroadcastListInfo('1234@broadcast')
 console.log (`list name: ${bList.name}, recps: ${bList.recipients}`)
 ```
 
@@ -2452,7 +2452,7 @@ Baileys is written with custom functionality in mind. Instead of forking the pro
 ### Enabling Debug Level in Baileys Logs
 First, enable the logging of unhandled messages from WhatsApp by setting:
 ```ts
-const sanka = makeWASocket({
+const sock = makeWASocket({
     logger: P({ level: 'debug' }),
 })
 ```
@@ -2507,13 +2507,13 @@ The `'frame'` is what the message received is, it has three components:
 
 ```ts
 // for any message with tag 'edge_routing'
-sanka.ws.on('CB:edge_routing', (node: BinaryNode) => { })
+sock.ws.on('CB:edge_routing', (node: BinaryNode) => { })
 
 // for any message with tag 'edge_routing' and id attribute = abcd
-sanka.ws.on('CB:edge_routing,id:abcd', (node: BinaryNode) => { })
+sock.ws.on('CB:edge_routing,id:abcd', (node: BinaryNode) => { })
 
 // for any message with tag 'edge_routing', id attribute = abcd & first content node routing_info
-sanka.ws.on('CB:edge_routing,id:abcd,routing_info', (node: BinaryNode) => { })
+sock.ws.on('CB:edge_routing,id:abcd,routing_info', (node: BinaryNode) => { })
 ```
 
 > [!NOTE]
