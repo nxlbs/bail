@@ -2,20 +2,6 @@
 
 <div align="center">
 
-<img src="https://files.catbox.moe/clzacq.jpg" alt="Header Image" width="100%"/>
-
-<br/>
-
-<!-- WhatsApp Links -->
-<p>
-  <a href="https://whatsapp.com/channel/0029Vb054T9C1FuLUKkFy236">
-    <img src="https://img.shields.io/badge/WhatsApp-Channel-brightgreen" alt="WA Channel"/>
-  </a>
-  <a href="https://wa.me/6282375165100">
-    <img src="https://img.shields.io/badge/Owner-WA-green" alt="WA Owner"/>
-  </a>
-</p>
-
 </div>
 
 ### Important Note
