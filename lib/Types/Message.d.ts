@@ -147,6 +147,8 @@ export type AnyMediaMessageContent = (({
     ptt?: boolean;
     /** optionally tell the duration of the audio */
     seconds?: number;
+    /** waveform for rendering audio waves in the chat */
+    waveform?: Uint8Array;
 } | ({
     sticker: WAMediaUpload;
     isAnimated?: boolean;
